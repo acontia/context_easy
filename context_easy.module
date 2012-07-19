@@ -3,24 +3,24 @@
 /**
  * Implements hook_ctools_plugin_api
  */
+/*
 function context_easy_ctools_plugin_api($module, $api) {
   if ($module == 'context' && $api == 'plugins') {
     return array('version' => 3);
   }
 }
-
+*/
 
 /**
  * Implements hook_init
  */
 function context_easy_init() {
-
-  // @todo Check why classes are not loaded properly without this line
-  include_once(drupal_get_path('module', 'context_easy') . '/plugins/context_easy_context_conditions.inc');
+  
+  $context_easys = context_easy_get_contexts();
   
   // Register plugins
-  foreach ($context_easys as $name => $context_easy) {
-    if ($plugin = context_get_plugin('condition', 'context_easy_context_condition_' . $name)) {
+  foreach ($context_easys as $key => $context_easy) {
+    if ($plugin = context_get_plugin('condition', 'context_easy_condition_' . $key)) {
       $plugin->execute();
     }
   }
@@ -33,18 +33,7 @@ function context_easy_init() {
  * @todo Create a hook "hook_context_easy" so other modules can define Context easys
  */
 function context_easy_get_contexts() {
-
-  $contexts = module_invoke_all('context_easy');
-  kpr($contexts);
-  
-  /*
-  $contexts['test'] = array(
-    'title' => 'This is the title of the test easy context',
-    'description' => 'test_easy_context test_easy_context test_easy_contex',
-    'function' => 'test_easy_context'
-  );
-  */
-  
+  $contexts = module_invoke_all('context_easy');  
   return $contexts;
 }
 
@@ -57,12 +46,12 @@ function context_easy_context_plugins() {
   
   $context_easys = context_easy_get_contexts();
   
-  foreach ($context_easys as $name => $context_easy) {
-    $plugins['context_easy_context_condition_' . $name] = array(
+  foreach ($context_easys as $key => $context_easy) {
+    $plugins['context_easy_condition_' . $key] = array(
       'handler' => array(
         'path' => drupal_get_path('module', 'context_easy') . '/plugins',
         'file' => 'context_easy_context_conditions.inc',
-        'class' => 'context_easy_context_condition_' . $name,
+        'class' => 'context_easy_condition_' . $key,
         'parent' => 'context_condition',
       ),
     );
@@ -81,31 +70,12 @@ function context_easy_context_registry() {
   
   $context_easys = context_easy_get_contexts();
   
-  foreach ($context_easys as $name => $context_easy) {
-    $registry['conditions']['context_easy_context_condition_' . $name] = array(
+  foreach ($context_easys as $key => $context_easy) {
+    $registry['conditions']['context_easy_condition_' . $key] = array(
       'title' => t($context_easy['title']),
       'description' => t($context_easy['description']),
-      'plugin' => 'context_easy_context_condition_' . $name,
+      'plugin' => 'context_easy_condition_' . $key,
     );
   }
   return $registry;
-}
-
-
-function test_easy_context() {
-  print("executing test_easy_context");
-  return TRUE;
-}
-
-
-function context_easy_context_easy() {
-  $contexts = array();
-  
-  $contexts['testhook'] = array(
-    'title' => 'ttttttttThis is the title of the test easy context',
-    'description' => 'test_easy_context test_easy_context test_easy_contex',
-    'function' => 'test_easy_context'
-  );
-  
-  return $contexts;
 }
