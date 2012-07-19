@@ -35,7 +35,7 @@ function example_ce_context_easy() {
 
 
 function example_ce_check_even() {
-  dpm("executing example_ce_check_even");
+  kpr("executing example_ce_check_even");
   
   $minute = date("i");
   
@@ -49,7 +49,7 @@ function example_ce_check_even() {
 }
 
 function example_ce_check_odd() {
-  dpm("executing example_ce_check_odd");
+  kpr("executing example_ce_check_odd");
   
   $minute = date("i");
   
@@ -63,7 +63,7 @@ function example_ce_check_odd() {
 }
 
 function ppppp() {
-  dpm("executing ppppp");
+  kpr("executing ppppp");
 }
 
 
