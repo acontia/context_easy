@@ -14,6 +14,7 @@ function context_easy_ctools_plugin_api($module, $api) {
  * Implements hook_init
  */
 function context_easy_init() {
+  
   $context_easys = context_easy_all_contexts();
   
   foreach ($context_easys as $name => $context_easy) {
@@ -31,10 +32,10 @@ function context_easy_init() {
 function context_easy_all_contexts() {
   $contexts = array();
 
-  $contexts['region_or_region_page'] = array(
-    'title' => 'Region or region page',
-    'description' => 'Set this context when the viewed page is a region or a node that belongs to a region',
-    'function' => 'pbl_groups_is_region_or_region_page'
+  $contexts['test'] = array(
+    'title' => 'This is the title of the test easy context',
+    'description' => 'test_easy_context test_easy_context test_easy_contex',
+    'function' => 'test_easy_context'
   );
   
   return $contexts;
@@ -59,6 +60,7 @@ function context_easy_context_plugins() {
       ),
     );
   }
+  kpr($plugins);
   return $plugins;
 }
 
@@ -80,5 +82,12 @@ function context_easy_context_registry() {
       'plugin' => 'context_easy_context_condition_' . $name,
     );
   }
+  kpr($registry);
   return $registry;
+}
+
+
+function test_easy_context() {
+  print("executing test_easy_context");
+  return TRUE;
 }

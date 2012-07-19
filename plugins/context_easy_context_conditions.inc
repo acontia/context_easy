@@ -1,1 +1,29 @@
-<?php$context_easys = context_easy_all_contexts();foreach ($context_easys as $name => $context_easy) {  $class_name = 'context_easy_context_condition_' . $name;  $function = $context_easy['function'];  eval('class ' . $class_name . ' extends context_condition {        function condition_values() {      return array(1 => t("Active"));    }        function execute() {          foreach ($this->get_contexts() as $context) {        if (' . $function . ') {          $this->condition_met($context);        }      }    }  }');}
+<?php
+
+
+$context_easys = context_easy_all_contexts();
+
+foreach ($context_easys as $name => $context_easy) {
+
+  $class_name = 'context_easy_context_condition_' . $name;
+  $function = $context_easy['function'];
+
+  eval('class ' . $class_name . ' extends context_condition {
+    
+    function condition_values() {
+      return array(1 => t("Active"));
+    }
+    
+    function execute() {
+    
+      foreach ($this->get_contexts() as $context) {
+        if (' . $function . ') {
+          $this->condition_met($context);
+        }
+      }
+
+    }
+  }');
+
+
+}

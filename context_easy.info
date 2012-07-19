@@ -1,4 +1,4 @@
-name = "Context Easy"
+name = "Context easy"
 dependencies[] = "context"
 description = "Provides a hook to create simple custom Context conditions and reactions with just a couple lines of code"
 package = "Context"
