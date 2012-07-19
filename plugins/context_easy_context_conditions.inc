@@ -1,7 +1,7 @@
 <?php
 
 
-$context_easys = context_easy_all_contexts();
+$context_easys = context_easy_get_contexts();
 
 foreach ($context_easys as $name => $context_easy) {
 
