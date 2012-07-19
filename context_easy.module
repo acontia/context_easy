@@ -1,17 +1,6 @@
 <?php
 
 /**
- * Implements hook_ctools_plugin_api
- */
-/*
-function context_easy_ctools_plugin_api($module, $api) {
-  if ($module == 'context' && $api == 'plugins') {
-    return array('version' => 3);
-  }
-}
-*/
-
-/**
  * Implements hook_init
  */
 function context_easy_init() {
@@ -29,8 +18,7 @@ function context_easy_init() {
 
 
 /**
- * Returns all the the Context easys
- * @todo Create a hook "hook_context_easy" so other modules can define Context easys
+ * Returns all the conditions and reactions set using hook_context_easy
  */
 function context_easy_get_contexts() {
   $contexts = module_invoke_all('context_easy');  
@@ -47,15 +35,21 @@ function context_easy_context_plugins() {
   $context_easys = context_easy_get_contexts();
   
   foreach ($context_easys as $key => $context_easy) {
-    $plugins['context_easy_condition_' . $key] = array(
+    $type = $context_easy['type'];
+    
+    $plugins['context_easy_' . $type . '_' . $key] = array(
       'handler' => array(
         'path' => drupal_get_path('module', 'context_easy') . '/plugins',
-        'file' => 'context_easy_context_conditions.inc',
-        'class' => 'context_easy_condition_' . $key,
-        'parent' => 'context_condition',
+        'file' => 'context_easy_context_' . $type . 's.inc',
+        'class' => 'context_easy_' . $type . '_' . $key,
+        'parent' => 'context_' . $type,
       ),
     );
+    
+    
   }
+  
+  kpr($plugins);
   return $plugins;
 }
 
@@ -71,11 +65,18 @@ function context_easy_context_registry() {
   $context_easys = context_easy_get_contexts();
   
   foreach ($context_easys as $key => $context_easy) {
-    $registry['conditions']['context_easy_condition_' . $key] = array(
+    $type = $context_easy['type'];
+    
+    $registry['' . $type . 's']['context_easy_' . $type . '_' . $key] = array(
       'title' => t($context_easy['title']),
       'description' => t($context_easy['description']),
-      'plugin' => 'context_easy_condition_' . $key,
+      'plugin' => 'context_easy_' . $type . '_' . $key,
     );
   }
+  kpr($registry);
   return $registry;
 }
+
+
+// include_once(drupal_get_path('module', 'context_easy') . '/plugins/context_easy_context_conditions.inc');
+// include_once(drupal_get_path('module', 'context_easy') . '/plugins/context_easy_context_reactions.inc');
