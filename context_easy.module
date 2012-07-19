@@ -9,9 +9,13 @@ function context_easy_init() {
   
   // Register plugins
   foreach ($context_easys as $key => $context_easy) {
-    if ($plugin = context_get_plugin('condition', 'context_easy_condition_' . $key)) {
+    $type = $context_easy['type'];
+    
+    if ($plugin = context_get_plugin($type, 'context_easy_' . $type . '_' . $key)) {
+      // kpr($plugin);
       $plugin->execute();
     }
+    
   }
   
 }
@@ -48,8 +52,6 @@ function context_easy_context_plugins() {
     
     
   }
-  
-  kpr($plugins);
   return $plugins;
 }
 
@@ -73,10 +75,5 @@ function context_easy_context_registry() {
       'plugin' => 'context_easy_' . $type . '_' . $key,
     );
   }
-  kpr($registry);
   return $registry;
 }
-
-
-// include_once(drupal_get_path('module', 'context_easy') . '/plugins/context_easy_context_conditions.inc');
-// include_once(drupal_get_path('module', 'context_easy') . '/plugins/context_easy_context_reactions.inc');

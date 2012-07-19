@@ -32,7 +32,12 @@ $type = $context_easy['type'];
       }
       
       function execute() {
-        ' . $function . '();
+        $contexts = context_active_contexts();
+        foreach ($contexts as $context) {
+          if (!empty($context->reactions["' . $class_name . '"])) {
+            ' . $function . '();
+          }
+        }
       }
     }');
   

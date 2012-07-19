@@ -1,0 +1,6 @@
+name = "Example CE"
+dependencies[] = "context_easy"
+description = "Example module implementing hook_context_easy"
+package = "Context"
+core = "7.x"
+project = "example_ce"
