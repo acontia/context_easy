@@ -1,0 +1,84 @@
+<?php
+
+/**
+ * Implements hook_ctools_plugin_api
+ */
+function context_easy_ctools_plugin_api($module, $api) {
+  if ($module == 'context' && $api == 'plugins') {
+    return array('version' => 3);
+  }
+}
+
+
+/**
+ * Implements hook_init
+ */
+function context_easy_init() {
+  $context_easys = context_easy_all_contexts();
+  
+  foreach ($context_easys as $name => $context_easy) {
+    if ($plugin = context_get_plugin('condition', 'context_easy_context_condition_' . $name)) {
+      $plugin->execute();
+    }
+  }
+}
+
+
+/**
+ * Returns all the the Context easys
+ * @todo Create a hook "hook_context_easy" so other modules can define Context easys
+ */
+function context_easy_all_contexts() {
+  $contexts = array();
+
+  $contexts['region_or_region_page'] = array(
+    'title' => 'Region or region page',
+    'description' => 'Set this context when the viewed page is a region or a node that belongs to a region',
+    'function' => 'pbl_groups_is_region_or_region_page'
+  );
+  
+  return $contexts;
+}
+
+
+/**
+ * Implements hook_context_plugins
+ */
+function context_easy_context_plugins() {
+  $plugins = array();
+  
+  $context_easys = context_easy_all_contexts();
+  
+  foreach ($context_easys as $name => $context_easy) {
+    $plugins['context_easy_context_condition_' . $name] = array(
+      'handler' => array(
+        'path' => drupal_get_path('module', 'context_easy') . '/plugins',
+        'file' => 'context_easy_context_conditions.inc',
+        'class' => 'context_easy_context_condition_' . $name,
+        'parent' => 'context_condition',
+      ),
+    );
+  }
+  return $plugins;
+}
+
+
+/**
+ * Implements hook_context_registry
+ * Makes Context easys available to use as Context conditions
+ */
+function context_easy_context_registry() {
+
+  $registry = array();
+  
+  $context_easys = context_easy_all_contexts();
+  
+  foreach ($context_easys as $name => $context_easy) {
+    $registry['conditions']['context_easy_context_condition_' . $name] = array(
+      'title' => t($context_easy['title']),
+      'description' => t($context_easy['description']),
+      'plugin' => 'context_easy_context_condition_' . $name,
+    );
+  }
+  return $registry;
+}
