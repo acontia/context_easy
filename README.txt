@@ -75,3 +75,8 @@ NOTES
   - Similar functionality is provided by the module Context PHP. The main
     difference is that Context Easy doesn't store code in the database.
 
+
+CREDIT
+======
+  Developed by acontia (http://drupal.org/user/46230) during the Drupal give
+  back days at Cameron & Wilding (http://www.cameronandwilding.com).
