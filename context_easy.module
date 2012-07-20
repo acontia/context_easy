@@ -6,14 +6,14 @@
 function context_eaesy_init() {
   
   $context_easys = context_easy_get_contexts();
-  drupal_set_message($context_easys);
+  dpm($context_easys);
   
   // Register plugins
   foreach ($context_easys as $key => $context_easy) {
     $type = $context_easy['type'];
     
     if ($plugin = context_get_plugin($type, 'context_easy_' . $type . '_' . $key)) {
-      drupal_set_message($plugin);
+      dpm($plugin);
       $plugin->execute();
     }
     
@@ -44,7 +44,7 @@ function context_easy_context_plugins() {
     
     
   }
-  drupal_set_message($plugins);
+  dpm($plugins);
   return $plugins;
 }
 
@@ -66,7 +66,7 @@ function context_easy_context_registry() {
       'plugin' => 'context_easy_' . $type . '_' . $key,
     );
   }
-  drupal_set_message($registry);
+  dpm($registry);
   return $registry;
 }
 
@@ -77,4 +77,38 @@ function context_easy_context_registry() {
 function context_easy_get_contexts() {
   $contexts = module_invoke_all('context_easy');  
   return $contexts;
+}
+
+
+/**
+ * Implementats hook_context_easy().
+ */
+function context_easy_context_easy() {
+  $contexts = array();
+  
+  $contexts['context_easy_test_condition'] = array(
+    'type' => 'condition',
+    'title' => 'Context easy test condition',
+    'description' => 'A test condition to test Context Easy module',
+    'function' => '_context_easy_test_condition',
+  );
+  
+  $contexts['context_easy_test_reaction'] = array(
+    'type' => 'reaction',
+    'title' => 'Context easy test reaction',
+    'description' => 'A test reaction to test Context Easy module',
+    'function' => '_context_easy_test_reaction',
+  );
+  
+  return $contexts;
+}
+
+
+function _context_easy_test_condition() {
+  drupal_set_message('executed ' . __FUNCTION__);
+  return TRUE;
+}
+
+function _context_easy_test_reaction() {
+  drupal_set_message('executed ' . __FUNCTION__);
 }

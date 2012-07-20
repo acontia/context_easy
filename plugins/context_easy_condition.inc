@@ -1,5 +1,13 @@
 <?php
 
+/*
+class context_easy_condition_context_easy_test_condition extends context_condition {
+  // Check why we need to define this class (even commented!!) to get the plugin
+  // loaded
+}
+*/
+
+
 $context_easys = context_easy_get_contexts();
 
 $classes_definitions = '';
