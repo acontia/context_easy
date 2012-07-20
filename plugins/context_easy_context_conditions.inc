@@ -1,11 +1,5 @@
 <?php
-/*
-class context_easy_condition_even_minute extends context_condition{
 
-}
-*/
-
-/////////////////////////// CLASSES AUTO DEFINED //////////////////////////
 
 $context_easys = context_easy_get_contexts();
 
@@ -44,7 +38,4 @@ $type = $context_easy['type'];
 
 
 eval($classes_definitions);
-
-
-
 

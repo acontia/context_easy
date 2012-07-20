@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implements hook_init
+ * Implements hook_init().
  */
 function context_easy_init() {
   
@@ -12,7 +12,6 @@ function context_easy_init() {
     $type = $context_easy['type'];
     
     if ($plugin = context_get_plugin($type, 'context_easy_' . $type . '_' . $key)) {
-      // print_r($plugin);
       $plugin->execute();
     }
     
@@ -22,7 +21,7 @@ function context_easy_init() {
 
 
 /**
- * Returns all the conditions and reactions set using hook_context_easy
+ * Returns all conditions and reactions defined with hook_context_easy().
  */
 function context_easy_get_contexts() {
   $contexts = module_invoke_all('context_easy');  
@@ -31,7 +30,7 @@ function context_easy_get_contexts() {
 
 
 /**
- * Implements hook_context_plugins
+ * Implements hook_context_plugins().
  */
 function context_easy_context_plugins() {
   $plugins = array();
@@ -57,7 +56,7 @@ function context_easy_context_plugins() {
 
 
 /**
- * Implements hook_context_registry
+ * Implements hook_context_registry().
  * Makes Context easys available to use as Context conditions
  */
 function context_easy_context_registry() {

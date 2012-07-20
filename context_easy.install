@@ -2,11 +2,11 @@
 
 /**
  * @file
- * Install file for the context_easy module.
+ * Install functions for the context_easy module.
  */ 
 
 /**
- * Implementation of hook_enable().
+ * Implements hook_enable().
  */
 function context_easy_enable() {
   context_invalidate_cache();

@@ -12,15 +12,13 @@ function example_ce_context_easy() {
     'description' => 'Active when the current minute is even',
     'function' => 'example_ce_check_even'
   );
-
   
   $contexts['odd_minute'] = array(
     'type' => 'condition',
     'title' => 'Is odd minute',
     'description' => 'Active when the current minute is odd',
     'function' => 'example_ce_check_odd'
-  );
-  
+  );  
   
   $contexts['ppppp'] = array(
     'type' => 'reaction',
@@ -35,7 +33,7 @@ function example_ce_context_easy() {
 
 
 function example_ce_check_even() {
-  print_r("executing example_ce_check_even");
+  print_r("executing " . __FUNCTION__);
   
   $minute = date("i");
   
@@ -49,7 +47,7 @@ function example_ce_check_even() {
 }
 
 function example_ce_check_odd() {
-  print_r("executing example_ce_check_odd");
+  print_r("executing " . __FUNCTION__);
   
   $minute = date("i");
   
@@ -63,7 +61,7 @@ function example_ce_check_odd() {
 }
 
 function ppppp() {
-  print_r("executing ppppp");
+  print_r("executing " . __FUNCTION__);
 }
 
 
