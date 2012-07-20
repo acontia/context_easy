@@ -105,10 +105,9 @@ function context_easy_context_easy() {
 
 
 function _context_easy_test_condition() {
-  drupal_set_message('executed ' . __FUNCTION__);
   return TRUE;
 }
 
 function _context_easy_test_reaction() {
-  drupal_set_message('executed ' . __FUNCTION__);
+  drupal_set_message(t('executed _context_easy_test_reaction()'));
 }
