@@ -1,8 +1,8 @@
 <?php
 
 /*
-class context_easy_condition_context_easy_test_condition extends context_condition {
-  // Check why we need to define this class (even commented!!) to get the plugin
+class context_easy_reaction_context_easy_test_reaction extends context_reaction {
+  // @todo Check why we need to define this class (even commented!!) to get the plugin
   // loaded
 }
 */
