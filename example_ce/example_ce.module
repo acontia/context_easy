@@ -33,7 +33,7 @@ function example_ce_context_easy() {
 
 
 function example_ce_check_even() {
-  // dpm("executing " . __FUNCTION__);
+  drupal_set_message("executing " . __FUNCTION__);
   
   $minute = date("i");
   
@@ -47,7 +47,7 @@ function example_ce_check_even() {
 }
 
 function example_ce_check_odd() {
-  // dpm("executing " . __FUNCTION__);
+  drupal_set_message("executing " . __FUNCTION__);
   
   $minute = date("i");
   
@@ -61,7 +61,7 @@ function example_ce_check_odd() {
 }
 
 function ppppp() {
-  // dpm("executing " . __FUNCTION__);
+  drupal_set_message("executing " . __FUNCTION__);
 }
 
 
