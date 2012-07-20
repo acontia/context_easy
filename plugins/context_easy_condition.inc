@@ -1,6 +1,5 @@
 <?php
 
-
 $context_easys = context_easy_get_contexts();
 
 $classes_definitions = '';
@@ -28,14 +27,12 @@ foreach ($context_easys as $key => $context_easy) {
             $this->condition_met($context);
           }
         }
-
       }
     }');
   
   }
 
 }
-
 
 eval($classes_definitions);
 

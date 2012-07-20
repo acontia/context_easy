@@ -1,11 +1,4 @@
 <?php
-/*
-class context_easy_reaction_ppppp extends context_condition{
-
-}
-*/
-
-/////////////////////////// CLASSES AUTO DEFINED //////////////////////////
 
 $context_easys = context_easy_get_contexts();
 
@@ -46,6 +39,4 @@ foreach ($context_easys as $key => $context_easy) {
 }
 
 eval($classes_definitions);
-
-
 

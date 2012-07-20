@@ -6,14 +6,14 @@
 function context_eaesy_init() {
   
   $context_easys = context_easy_get_contexts();
-  dpm($context_easys);
+  drupal_set_message($context_easys);
   
   // Register plugins
   foreach ($context_easys as $key => $context_easy) {
     $type = $context_easy['type'];
     
     if ($plugin = context_get_plugin($type, 'context_easy_' . $type . '_' . $key)) {
-      dpm($plugin);
+      drupal_set_message($plugin);
       $plugin->execute();
     }
     
@@ -44,7 +44,7 @@ function context_easy_context_plugins() {
     
     
   }
-  dpm($plugins);
+  drupal_set_message($plugins);
   return $plugins;
 }
 
@@ -66,7 +66,7 @@ function context_easy_context_registry() {
       'plugin' => 'context_easy_' . $type . '_' . $key,
     );
   }
-  dpm($registry);
+  drupal_set_message($registry);
   return $registry;
 }
 
