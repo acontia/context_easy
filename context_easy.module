@@ -12,7 +12,7 @@ function context_easy_init() {
     $type = $context_easy['type'];
     
     if ($plugin = context_get_plugin($type, 'context_easy_' . $type . '_' . $key)) {
-      // kpr($plugin);
+      // print_r($plugin);
       $plugin->execute();
     }
     
