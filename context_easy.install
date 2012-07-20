@@ -2,7 +2,7 @@
 /**
  * @file
  * Install functions for the context_easy module.
- */ 
+ */
 
 /**
  * Implements hook_enable().
